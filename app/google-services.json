@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "991461649947",
+    "firebase_url": "https://course-film-project-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "course-film-project",
+    "storage_bucket": "course-film-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991461649947:android:0614d129441ed48a57d2be",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991461649947-0rf3vqf0d8krcduuugrhakfcf133h3v3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "15918cf7cdee3b5545e4b87457c5444b5bf2fa5a"
+          }
+        },
+        {
+          "client_id": "991461649947-ogl96tfg76sav7c9j2vor9v8e2hqf9a6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "61c901b0bce7ba38783a69b26f80c6d10845d1ef"
+          }
+        },
+        {
+          "client_id": "991461649947-j6av86lunurb825d3r1i2sktn4ab00c3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCI4nh4ukgKfImWyp2oCxoqdMi6Y_yRKlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991461649947-j6av86lunurb825d3r1i2sktn4ab00c3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
