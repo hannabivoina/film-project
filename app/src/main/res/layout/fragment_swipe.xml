@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motionLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:clipChildren="false"
+    app:layoutDescription="@xml/motion_scene"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:id="@+id/bottomCard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/bottomCardImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/topCard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/topCardImage"
+            android:layout_width="match_parent"
+            android:layout_height="720dp" />
+
+        <ImageButton
+            android:id="@+id/topCardCloseBut"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_baseline_close"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="12dp"
+            android:background="#25121212"
+            android:layout_gravity="top|end"/>
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/likeIcon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/background_circle"
+        android:src="@drawable/ic_favorite_border"
+        app:tint="#fbc02d" />
+
+    <ImageView
+        android:id="@+id/passIcon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/background_circle"
+        android:src="@drawable/ic_baseline_close"
+        app:tint="#e64a19" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/filmMatchCard"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:backgroundTint="#121212"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/filmMatchCardInfoLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/filmMatchFilmTitle"
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@color/holo_red"
+                    android:textSize="32sp"
+                    tools:text="Inception (2010)" />
+
+            <TextView
+                android:id="@+id/filmMatchGenresList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:maxLines="2"
+                android:textSize="12sp"
+                tools:text="Comedy" />
+
+
+            <TextView
+                android:id="@+id/filmMatchPlot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:maxLines="8"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscious during the dream state, when the mind is at its most vulnerable..." />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

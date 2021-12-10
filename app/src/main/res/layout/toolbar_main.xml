@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbarMenuLay"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/greyDark"
+    app:menu="@menu/app_menu">
+
+    <TextView
+        android:id="@+id/toolbarMainTitle"
+        android:layout_width="320dp"
+        android:layout_height="24dp"
+        android:textColor="@color/white"
+        android:text="Films"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="12dp"
+        android:textSize="20sp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.appcompat.widget.Toolbar>

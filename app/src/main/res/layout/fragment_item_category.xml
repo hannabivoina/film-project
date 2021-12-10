@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/filmCategoriesLay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/topCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TOP Movies" />
+
+        <CheckBox
+            android:id="@+id/soonCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coming Soon" />
+
+        <CheckBox
+            android:id="@+id/comedyCheck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comedy" />
+
+        <CheckBox
+            android:id="@+id/dramaCheck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Drama" />
+
+        <CheckBox
+            android:id="@+id/horrorCheck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Horror" />
+
+        <CheckBox
+            android:id="@+id/actionCheck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Action" />
+    </LinearLayout>
+
+</FrameLayout>
