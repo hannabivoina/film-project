@@ -41,9 +41,9 @@ class MainActivity : AppCompatActivity(), AppContract {
             if (auth.currentUser != null) {
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.mainLay, MainFragment())
+                    .replace(R.id.mainLay, FavoriteFilmsFragment())
                     .commit()
-            }
+            } else {signOut()}
         }
 
         binding.bottomNavigationView.background = null
@@ -61,8 +61,10 @@ class MainActivity : AppCompatActivity(), AppContract {
 
     override fun signOut() {
         auth.signOut()
-        val intent = Intent(this, StartActivity::class.java)
-        startActivity(intent)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.mainActivityLay, RegistrationFragment())
+            .commit()
     }
 
     private fun toHomeFragment() {
@@ -90,7 +92,6 @@ class MainActivity : AppCompatActivity(), AppContract {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.mainLay, StartSwipeFragment())
-            .addToBackStack(null)
             .commit()
     }
 

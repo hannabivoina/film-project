@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
 import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
@@ -22,6 +23,8 @@ import com.example.myapplication.databinding.FragmentFavoriteFilmsBinding
 import com.example.myapplication.view.adapter.FilmInterface
 import com.example.myapplication.view.adapter.FilmListAdapter
 import com.example.myapplication.viewModel.ProfileViewModel
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,6 +35,7 @@ class FavoriteFilmsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewPager: ViewPager2
+    private lateinit var tabLayout: TabLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +48,13 @@ class FavoriteFilmsFragment : Fragment() {
 
         val pagerAdapter = ScreenSlidePagerAdapter(requireActivity())
         viewPager.adapter = pagerAdapter
+
+        tabLayout = binding.tabLayout
+
+        TabLayoutMediator(tabLayout, viewPager){tab, position ->
+
+        }.attach()
+
 
         binding.mainToolbar.apply {
             toolbarMainTitle.text = resources.getString(R.string.favorite)

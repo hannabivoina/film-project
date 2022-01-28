@@ -100,12 +100,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
         }, list)
 
-        binding.filmsCollectionRecycler.adapter = adapter
-        binding.filmsCollectionRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.apply {
+            filmsCollectionRecycler.isNestedScrollingEnabled = false
+            filmsCollectionRecycler.adapter = adapter
+            filmsCollectionRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
+        }
     }
 
     private fun setupCategoryRecyclerView() {
         binding.apply {
+            filmsCategoryLay.isNestedScrollingEnabled = false
             filmsCategoryLay.layoutManager = LinearLayoutManager(requireContext())
             filmsCategoryLay.adapter = categoryAdapter
         }

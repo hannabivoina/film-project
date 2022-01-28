@@ -49,4 +49,5 @@ class FilmListAdapter(
                 .into(filmPoster)
         }
     }
+
 }

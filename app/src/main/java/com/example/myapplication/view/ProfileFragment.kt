@@ -1,14 +1,23 @@
 package com.example.myapplication.view
 
+import android.Manifest
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -29,9 +38,17 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
+    private val permissionsLauncher = registerForActivityResult(RequestPermission(), ::onGotPermissionsResult)
+
     private lateinit var auth: FirebaseAuth
 
     private val viewModel by viewModels<ProfileViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        retainInstance
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +59,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         binding.mainToolbar.toolbarMainTitle.text = resources.getString(R.string.profile)
 
-        if(contract()?.isNetworkAvailable(requireContext()) == true){
+        if (contract()?.isNetworkAvailable(requireContext()) == true) {
 
             binding.mainToolbar.toolbarMenuLay.setOnMenuItemClickListener {
                 when (it.itemId) {
@@ -52,7 +69,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             }
 
             auth = Firebase.auth
-            if (auth.currentUser!=null){
+            if (auth.currentUser != null) {
                 setupProfileImage(auth.currentUser?.photoUrl)
             }
 
@@ -69,6 +86,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 }.show()
         }
 
+        binding.userPhotoButton.setOnClickListener {
+            permissionsLauncher.launch(Manifest.permission.CAMERA)
+        }
+
         return binding.root
     }
 
@@ -79,6 +100,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 .load(uri)
                 .circleCrop()
                 .into(binding.userPhoto)
+        }
+    }
+
+    private fun onGotPermissionsResult(granted: Boolean){
+        if(granted){
+            Toast.makeText(requireContext(), "Permission granted", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_LONG).show()
         }
     }
 

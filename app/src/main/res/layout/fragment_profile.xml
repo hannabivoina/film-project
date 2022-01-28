@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="56dp">
 
     <include
         android:id="@+id/mainToolbar"
@@ -27,6 +28,14 @@
             android:background="@drawable/oval"
             android:backgroundTint="@color/black"
             android:src="@drawable/person"/>
+
+        <ImageButton
+            android:id="@+id/userPhotoButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/ic_circle_button"
+            android:src="@drawable/ic_camera"
+            android:layout_gravity="bottom|right"/>
 
     </FrameLayout>
 
