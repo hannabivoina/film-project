@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -77,6 +78,10 @@ class SwipeFragment : Fragment() {
             }
         }
 
+        viewModelSwipe.getErrorApiCalls().observe(viewLifecycleOwner){
+            errorFromApiCalls()
+        }
+
         return binding.root
     }
 
@@ -89,6 +94,7 @@ class SwipeFragment : Fragment() {
             Glide
                 .with(requireContext())
                 .load(model.top.filmImage)
+                .placeholder(R.drawable.ic_default_film_image_foreground)
                 .optionalCenterCrop()
                 .into(topCardImage)
 
@@ -104,6 +110,15 @@ class SwipeFragment : Fragment() {
     private fun toMainActivity() {
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun errorFromApiCalls(){
+        AlertDialog
+            .Builder(requireContext())
+            .setMessage("IMDb Api allows make only 100 calls a day. You can text me in Telegram(@annabivoina) and I'll change Api key and you'll continue use this app")
+            .setNegativeButton("cancel") { dialog, _ ->
+                dialog.cancel()
+            }.show()
     }
 
     override fun onDestroyView() {

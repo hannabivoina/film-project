@@ -11,8 +11,6 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 interface ProfileRepositoryImpl {
-    suspend fun getSavedCategories(): List<FilmListCategory>
-    suspend fun addCategoriesToSaved(catList: List<FilmListCategory>): List<FilmListCategory>
     suspend fun getSavedFavoriteFilms(): List<FilmCard>
     suspend fun addFilmToSaved(filmCard: FilmCard)
     suspend fun deleteFilmFromSaved(filmId: String): List<FilmCard>
@@ -28,29 +26,7 @@ class ProfileRepository @Inject constructor(
     private val savedSwipeFilmsDao: SavedSwipeFilmsDao
 ) : ProfileRepositoryImpl {
 
-    private var savedCategoriesList: List<FilmListCategory> = emptyList()
     private var savedFavoriteFilmsList: List<FilmCard> = emptyList()
-
-    override suspend fun getSavedCategories(): List<FilmListCategory> {
-        return withContext(Dispatchers.IO) {
-            savedCategoriesList = savedCategoriesDao.getAllSavedCategories()
-            savedCategoriesList
-        }
-    }
-
-    private suspend fun clearSavedCategories() {
-        withContext(Dispatchers.IO) {
-            savedCategoriesDao.clearAll()
-        }
-    }
-
-    override suspend fun addCategoriesToSaved(catList: List<FilmListCategory>): List<FilmListCategory> {
-        return withContext(Dispatchers.IO) {
-            savedCategoriesDao.insertCategory(catList)
-            getSavedCategories()
-            savedCategoriesList
-        }
-    }
 
     override suspend fun getSavedFavoriteFilms(): List<FilmCard> {
         return withContext(Dispatchers.IO) {

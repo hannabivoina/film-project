@@ -44,6 +44,8 @@ class FavoriteSavedSwipeFragment: Fragment() {
     }
 
     private fun setupRecycler(listFilmCard: List<FilmCardStandard>) {
+        binding.favoriteSwipeFilmsRecycler.isNestedScrollingEnabled = true
+
         binding.favoriteSwipeFilmsRecycler.apply {
             adapter = FilmStandardAdapter(object : FilmInterface {
                 override fun goToFilm(id: String) {

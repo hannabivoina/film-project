@@ -81,16 +81,61 @@
                 android:textSize="16dp" />
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/userEdit"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/userFavoritesLay"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userNameLay">
+
+        <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_gravity="center"
             android:layout_marginStart="24dp"
-            android:layout_gravity="center_vertical"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_edit" />
+            android:src="@drawable/ic_favorite" />
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:orientation="vertical"
+            android:gravity="">
+
+            <TextView
+                android:id="@+id/userFavoriteText"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/favoriteFilms"
+                android:textColor="@android:color/secondary_text_dark"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/userFavoriteNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="20"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+        </LinearLayout>
 
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/profileLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/greyLight"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/userNameLay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
     <TextView
@@ -99,7 +144,7 @@
         android:layout_height="wrap_content"
         android:text="Sign Out"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userNameLay"
+        app:layout_constraintTop_toBottomOf="@id/userFavoritesLay"
         android:layout_margin="16dp"
         android:textSize="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

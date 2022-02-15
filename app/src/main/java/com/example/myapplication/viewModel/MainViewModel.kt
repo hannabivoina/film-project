@@ -22,14 +22,11 @@ class MainViewModel @Inject constructor(
     private val filmsRepository: FilmsRepositoryImpl,
 ) : ViewModel() {
 
-    var num = 0
-
     val newArr = ArrayList<FilmListCategory>()
     val listCollection = listOf<String>(DISNEY_CONST, ASIAN_CONST, WARNER_CONST, MOST_POPULAR_CONST)
 
-
-    private val _categoriesLiveData = SingleLiveEvent<List<FilmListCategory>?>()
-    fun getCategoriesData(): SingleLiveEvent<List<FilmListCategory>?> {
+    private val _categoriesLiveData = SingleLiveEvent<List<FilmListCategory>>()
+    fun getCategoriesData(): SingleLiveEvent<List<FilmListCategory>> {
         return _categoriesLiveData
     }
 

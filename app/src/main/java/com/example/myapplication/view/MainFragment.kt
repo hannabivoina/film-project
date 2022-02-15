@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -40,14 +42,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     })
 
     private val viewModel by viewModels<MainViewModel>()
-    private val profileViewModel by viewModels<ProfileViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (savedInstanceState == null) {
-            profileViewModel.getSavedCategories()
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,9 +56,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         if(contract()?.isNetworkAvailable(requireContext()) == true){
 
             viewModel.searchFilm()
+            binding.filmMainProgressBar.visibility = ProgressBar.VISIBLE
 
             viewModel.getCategoriesData().observe(viewLifecycleOwner) {
-                if (it != null) {
+                binding.filmMainProgressBar.visibility = ProgressBar.INVISIBLE
+                if (it.isEmpty() || it[0].filmList.isEmpty()) {
+                    errorData()
+                } else {
                     categoryAdapter.updateList(it)
                     setupCollectionRecyclerView(viewModel.listCollection)
                 }
@@ -72,6 +70,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
             viewModel.errorLiveData.observe(viewLifecycleOwner){
                 Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+                binding.filmMainProgressBar.visibility = ProgressBar.INVISIBLE
             }
 
             binding.mainToolbar.toolbarMenuLay.setOnMenuItemClickListener {
@@ -113,6 +112,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             filmsCategoryLay.layoutManager = LinearLayoutManager(requireContext())
             filmsCategoryLay.adapter = categoryAdapter
         }
+    }
+
+    private fun errorData(){
+        AlertDialog
+            .Builder(requireContext())
+            .setMessage("IMDb Api allows make only 100 calls a day. You can text me in Telegram(@annabivoina) and I'll change Api key and you'll continue use this app")
+            .setNegativeButton("cancel") { dialog, _ ->
+                dialog.cancel()
+            }.show()
     }
 
     override fun onDestroyView() {

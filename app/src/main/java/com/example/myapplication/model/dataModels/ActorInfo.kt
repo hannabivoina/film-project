@@ -9,5 +9,6 @@ data class ActorInfo(
     val image: String,
     val role: String,
     val summary: String,
-    val knownFor: List<KnownFor>
+    val knownFor: List<KnownFor>,
+    val awards: String
 )

@@ -44,12 +44,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val viewModel by viewModels<ProfileViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        retainInstance
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,6 +52,16 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         binding.mainToolbar.toolbarMainTitle.text = resources.getString(R.string.profile)
+
+        viewModel.getSavedFilms()
+
+        viewModel.savedFilmsLiveData.observe(viewLifecycleOwner){
+            if (it!=null){
+                binding.userFavoriteNumber.text = it.size.toString()
+            } else {
+                binding.userFavoriteNumber.text = "0"
+            }
+        }
 
         if (contract()?.isNetworkAvailable(requireContext()) == true) {
 
@@ -71,6 +75,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             auth = Firebase.auth
             if (auth.currentUser != null) {
                 setupProfileImage(auth.currentUser?.photoUrl)
+                binding.userName.text = auth.currentUser?.email
             }
 
             binding.profileSignOut.setOnClickListener {

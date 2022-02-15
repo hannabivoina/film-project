@@ -3,7 +3,7 @@
     <item android:height="202dp">
         <color android:color="@android:color/transparent"/>
     </item>
-    <item android:top="202dp" android:height="102dp">
+    <item android:top="242dp" android:height="102dp">
         <shape
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:shape="rectangle">

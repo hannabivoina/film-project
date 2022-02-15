@@ -46,7 +46,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="56dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/getStarted" />
+            android:text="@string/getStarted"
+            android:backgroundTint="@color/holo_red"/>
 
         <Button
             android:id="@+id/registrationButtonSignIn"

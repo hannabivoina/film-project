@@ -51,7 +51,7 @@ class FavoriteFilmsFragment : Fragment() {
 
         tabLayout = binding.tabLayout
 
-        TabLayoutMediator(tabLayout, viewPager){tab, position ->
+        TabLayoutMediator(tabLayout, viewPager){_, _ ->
 
         }.attach()
 

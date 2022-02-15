@@ -23,6 +23,7 @@ data class ActorFilmsResult(
         image,
         role,
         summary,
-        knownFor
+        knownFor,
+        awards
     )
 }

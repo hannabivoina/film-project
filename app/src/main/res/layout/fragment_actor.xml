@@ -4,11 +4,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginBottom="56dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <include
-        android:id="@+id/mainToolbar"
+        android:id="@+id/actorToolbar"
         layout="@layout/toolbar_main"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -16,7 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/mainToolbar"
+        app:layout_constraintTop_toBottomOf="@id/actorToolbar"
         android:orientation="vertical">
 
         <TextView
@@ -69,8 +68,7 @@
                     android:layout_height="wrap_content"
                     tools:text="ns;dcdncdsjknjkcdnkj;snkdnskn"
                     android:textColor="@color/white"
-                    android:textSize="14dp"
-                    android:maxLines="6"/>
+                    android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/actorBirth"
@@ -83,6 +81,16 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/actorSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="14dp"
+            android:textColor="@android:color/secondary_text_dark"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
 
         <TextView
             android:id="@+id/filmographyTitle"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -41,13 +42,12 @@ class FavoriteSavedFilmsFragment: Fragment() {
             }
         }
 
-        binding.favoriteFilmsTitle.text = resources.getString(R.string.savedFilmsCollection)
-
         return binding.root
     }
 
     private fun setupRecycler(listFilmCard: List<FilmCard>) {
         binding.favoriteFilmsRecycler.apply {
+            isNestedScrollingEnabled = false
             adapter = FilmStandardAdapter(object : FilmInterface {
                 override fun goToFilm(id: String) {
                     contract()?.toFilmInformation(id)
@@ -61,4 +61,6 @@ class FavoriteSavedFilmsFragment: Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

@@ -6,8 +6,7 @@
     android:id="@+id/filmMotionLay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/fragment_film_scene"
-    android:layout_marginBottom="56dp">
+    app:layoutDescription="@xml/fragment_film_scene">
 
     <include
         android:id="@+id/mainToolbar"
@@ -16,18 +15,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
-        android:id="@+id/filmPhotoTrailerLay"
-        android:layout_width="match_parent"
-        android:layout_height="202dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainToolbar"
-        app:layout_constraintVertical_bias="0" />
-
-    <FrameLayout
         android:id="@+id/filmPosterLay"
         android:layout_width="match_parent"
-        android:layout_height="304dp"
+        android:layout_height="344dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainToolbar">
@@ -50,9 +40,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="250dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filmPhotoTrailerLay" />
+        app:layout_constraintTop_toBottomOf="@+id/mainToolbar"/>
 
     <TextView
         android:id="@+id/filmTitle"
@@ -145,7 +135,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
         android:text="@string/genres"
         android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -165,32 +154,18 @@
         app:layout_constraintTop_toBottomOf="@id/filmOtherInfoLay"
         tools:text="Comedy" />
 
-    <Button
-        android:id="@+id/buttonTrailer"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="@color/white"
-        android:text="play trailer"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filmGenresList"
-        android:visibility="gone"/>
-
-
-
     <TextView
         android:id="@+id/filmPlot"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
+        android:maxLines="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonTrailer"
+        app:layout_constraintTop_toBottomOf="@id/filmGenresList"
         tools:text="Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscious during the dream state, when the mind is at its most vulnerable..." />
 
     <TextView
@@ -202,6 +177,7 @@
         android:text="@string/stars"
         android:textColor="@color/white"
         android:textSize="16dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filmPlot" />
 
@@ -232,7 +208,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

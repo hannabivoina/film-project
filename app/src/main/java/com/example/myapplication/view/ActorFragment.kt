@@ -47,13 +47,13 @@ class ActorFragment : Fragment() {
                 viewModel.searchActorsFilm(args)
 
                 viewModel.actorFilmsLiveData.observe(viewLifecycleOwner) { info ->
-                    binding.mainToolbar.toolbarMainTitle.text = info.name
+                    binding.actorToolbar.toolbarMainTitle.text = info.name
                     setupRecycler(info.knownFor.map { it.toFilmCardStandard() })
                     bindActorInfo(info)
                 }
             }
 
-            binding.mainToolbar.toolbarMenuLay.setOnMenuItemClickListener {
+            binding.actorToolbar.toolbarMenuLay.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.app_menu_sign_out -> contract()?.signOut()
                 }
@@ -68,6 +68,8 @@ class ActorFragment : Fragment() {
                 }.show()
         }
 
+
+
         return binding.root
     }
 
@@ -75,8 +77,9 @@ class ActorFragment : Fragment() {
         binding.apply {
             actorName.text = actInfo.name
             actorJob.text = actInfo.role
-            actorInfo.text = actInfo.summary
-            actorBirth.text = actInfo.birthDate
+            actorInfo.text = actInfo.birthDate
+            actorBirth.text = actInfo.awards
+            actorSummary.text = actInfo.summary
 
             Glide
                 .with(requireContext())

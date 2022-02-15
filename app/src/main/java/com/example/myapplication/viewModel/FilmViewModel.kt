@@ -24,6 +24,11 @@ class FilmViewModel @Inject constructor(
     private val _filmInfoLiveData = MutableLiveData<FilmInfo>()
     val filmInfoLiveData: LiveData<FilmInfo> get() = _filmInfoLiveData
 
+    private val _errorLiveData = SingleLiveEvent<Boolean>()
+    fun errorLiveData(): SingleLiveEvent<Boolean>{
+        return _errorLiveData
+    }
+
     fun searchFilmInfo(id: String) {
         viewModelScope.launch {
             val filmsResult = filmsRepository.findFilmInfo(id)
@@ -32,6 +37,8 @@ class FilmViewModel @Inject constructor(
                     isFilmFavorite = checkIsFilmFavorite(id)
                     _filmInfoLiveData.postValue(it)
                 }
+            } else {
+                _errorLiveData.postValue(true)
             }
         }
     }

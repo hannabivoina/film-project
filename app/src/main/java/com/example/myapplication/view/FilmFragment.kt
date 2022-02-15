@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,11 +40,12 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
 
         val args = arguments?.getString(KEY_ARGS_FILM_CONST)
 
-        if(contract()?.isNetworkAvailable(requireContext()) == true){
+        if (contract()?.isNetworkAvailable(requireContext()) == true) {
+
             if (args == null) {
                 AlertDialog
                     .Builder(requireContext())
-                    .setTitle("Something is wrong. Please, check your internet connection")
+                    .setTitle("Something is wrong. Please, reload the app")
                     .setNegativeButton("cancel") { dialog, _ ->
                         dialog.cancel()
                     }.show()
@@ -53,6 +54,12 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
 
                 viewModel.filmInfoLiveData.observe(viewLifecycleOwner) {
                     bind(it)
+                }
+
+                viewModel.errorLiveData().observe(viewLifecycleOwner){
+                    if (it){
+                        errorData()
+                    }
                 }
 
                 viewModel.getSavedFilms()
@@ -66,13 +73,12 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
                         viewModel.changeFavoriteStatus(true)
                     }
                 }
-                binding.buttonTrailer.setOnClickListener {
-                    contract()?.toFilmTrailerFragment()
-                }
+
                 binding.filmPlot.setOnClickListener {
-                    binding.filmMotionLay.setTransition(R.id.start, R.id.endFullPlot)
+                    binding.filmMotionLay.setTransition(R.id.start, R.id.end)
                     binding.filmMotionLay.transitionToEnd()
                 }
+
                 binding.mainToolbar.toolbarMenuLay.setOnMenuItemClickListener {
                     when (it.itemId) {
                         R.id.app_menu_sign_out -> contract()?.signOut()
@@ -111,12 +117,13 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
             filmActorsRecycler.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-            filmSimilarMoviesRecycler.adapter = FilmStandardAdapter(object : FilmInterface{
+            filmSimilarMoviesRecycler.adapter = FilmStandardAdapter(object : FilmInterface {
                 override fun goToFilm(id: String) {
                     contract()?.toFilmInformation(id)
                 }
             }, film.similars)
-            filmSimilarMoviesRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            filmSimilarMoviesRecycler.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
             Glide
                 .with(requireContext())
@@ -125,6 +132,18 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
                 .into(filmPoster)
 
         }
+    }
+
+    private fun errorData(){
+        binding.filmRatingImage.isGone = true
+        AlertDialog
+            .Builder(requireContext())
+            .setMessage("IMDb Api allows make only 100 calls a day. You can text me in Telegram(@annabivoina) and I'll change Api key and you'll continue use this app")
+            .setNegativeButton("cancel") { dialog, _ ->
+                dialog.cancel()
+                contract()?.toStartSwipeFragment()
+            }.show()
+
     }
 
     private fun getFavoriteButton(boolean: Boolean) =

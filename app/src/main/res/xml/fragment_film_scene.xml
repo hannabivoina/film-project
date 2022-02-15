@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene
+<MotionScene 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000">
-        <KeyFrameSet>
-        </KeyFrameSet>
+        motion:duration="200">
+
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -16,42 +15,23 @@
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/filmPosterLay"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="304dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:visibility="invisible" />
-    </ConstraintSet>
-    <ConstraintSet
-        android:id="@+id/endFullPlot"
-        motion:deriveConstraintsFrom="@+id/start" >
-        <Constraint
-            android:id="@+id/filmPlot"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            motion:layout_constraintTop_toBottomOf="@id/buttonTrailer"
-            android:layout_marginStart="16dp"
-            motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="10dp" />
-        <Constraint
-            android:id="@+id/filmPlot"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            motion:layout_constraintHorizontal_bias="0.0"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            motion:layout_constraintTop_toBottomOf="@id/buttonTrailer"
-            android:layout_marginStart="16dp"
+            motion:layout_constraintTop_toBottomOf="@id/filmGenresList"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="10dp" />
+            android:layout_marginStart="16dp"
+            android:id="@+id/filmPlot" >
+            <CustomAttribute
+                motion:attributeName="maxLines"
+                motion:customIntegerValue="40" />
+        </Constraint>
     </ConstraintSet>
     <Transition
         motion:constraintSetStart="@+id/start"
-        motion:constraintSetEnd="@+id/endFullPlot" >
-        <OnClick motion:targetId="@+id/filmPlot" />
-    </Transition>
-
+        motion:constraintSetEnd="@+id/end"
+        />
 </MotionScene>

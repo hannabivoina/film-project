@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -35,8 +36,6 @@ class SearchResultFragment : Fragment() {
 
         val args = arguments?.getStringArrayList(KEY_ARGS_SEARCH_CONST)
 
-        binding.mainToolbar.toolbarMainTitle.text = "Search"
-
         if (contract()?.isNetworkAvailable(requireContext()) == true){
 
             binding.mainToolbar.toolbarMenuLay.setOnMenuItemClickListener {
@@ -48,13 +47,15 @@ class SearchResultFragment : Fragment() {
 
             if (args != null) {
                 viewModel.getInfoForSearchResultList(args)
+                binding.searchProgressBar.visibility = ProgressBar.VISIBLE
             }
 
             viewModel.getOthersFilmInfo().observe(viewLifecycleOwner) {
                 if (it.isEmpty()) {
+                    binding.searchProgressBar.visibility = ProgressBar.INVISIBLE
                     binding.searchEmpty.isGone = false
                 } else {
-                    binding.searchEmpty.isGone = true
+                    binding.searchProgressBar.visibility = ProgressBar.INVISIBLE
                     val adapter = HistoryAdapter(object : FilmInterface {
                         override fun goToFilm(id: String) {
                             contract()?.toFilmInformation(id)

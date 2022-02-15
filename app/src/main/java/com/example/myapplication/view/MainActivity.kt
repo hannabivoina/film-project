@@ -5,9 +5,8 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isGone
+import androidx.fragment.app.FragmentManager
 import com.example.myapplication.R
 import com.example.myapplication.common.AppContract
 import com.example.myapplication.databinding.ActivityMainBinding
@@ -39,11 +38,10 @@ class MainActivity : AppCompatActivity(), AppContract {
 
         if (savedInstanceState == null) {
             if (auth.currentUser != null) {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.mainLay, FavoriteFilmsFragment())
-                    .commit()
-            } else {signOut()}
+                toHomeFragment()
+            } else {
+                signOut()
+            }
         }
 
         binding.bottomNavigationView.background = null
@@ -60,14 +58,16 @@ class MainActivity : AppCompatActivity(), AppContract {
     }
 
     override fun signOut() {
+        clearBackStack()
         auth.signOut()
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.mainActivityLay, RegistrationFragment())
-            .commit()
+        val intent = Intent(this, StartActivity::class.java)
+        startActivity(intent)
+
+        finish()
     }
 
     private fun toHomeFragment() {
+        clearBackStack()
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.mainLay, MainFragment())
@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity(), AppContract {
     }
 
     private fun toProfileFragment() {
+        clearBackStack()
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.mainLay, ProfileFragment())
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity(), AppContract {
     }
 
     private fun toFavoriteFragment() {
+        clearBackStack()
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.mainLay, FavoriteFilmsFragment())
@@ -89,6 +91,7 @@ class MainActivity : AppCompatActivity(), AppContract {
     }
 
     override fun toStartSwipeFragment() {
+        clearBackStack()
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.mainLay, StartSwipeFragment())
@@ -104,6 +107,7 @@ class MainActivity : AppCompatActivity(), AppContract {
     }
 
     override fun toSearchFragment() {
+        clearBackStack()
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.mainLay, SearchFragment())
@@ -150,11 +154,7 @@ class MainActivity : AppCompatActivity(), AppContract {
     }
 
     override fun toFilmTrailerFragment() {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.filmPhotoTrailerLay, TrailerViewFragment())
-            .addToBackStack(null)
-            .commit()
+        TODO("Not yet implemented")
     }
 
     override fun isNetworkAvailable(context: Context): Boolean {
@@ -175,5 +175,12 @@ class MainActivity : AppCompatActivity(), AppContract {
             .replace(R.id.mainLay, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun clearBackStack() {
+        supportFragmentManager.popBackStack(
+            null,
+            FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
     }
 }

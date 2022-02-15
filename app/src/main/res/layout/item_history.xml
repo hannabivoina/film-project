@@ -31,6 +31,8 @@
             android:layout_height="22dp"
             tools:text="Film Name"
             android:textColor="@color/white"
+            android:ellipsize="end"
+            android:maxLines="1"
             />
 
         <TextView
@@ -39,6 +41,8 @@
             android:layout_height="19dp"
             tools:text="Film Name"
             android:textColor="@android:color/secondary_text_dark"
+            android:ellipsize="end"
+            android:maxLines="1"
             />
 
     </LinearLayout>
