@@ -13,8 +13,9 @@ interface AppContract {
     fun toActorFilms(id: String)
     fun toSearchFragment()
     fun toSearchResult(filmsTitle: ArrayList<String>)
-    fun toFilmTrailerFragment()
+    fun toFilmTrailerFragment(url: String)
     fun isNetworkAvailable(context: Context): Boolean
     fun signOut()
     fun toCollection(id: String)
+    fun closeTrailerFragment()
 }

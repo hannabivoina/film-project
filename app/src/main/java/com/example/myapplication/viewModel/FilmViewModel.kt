@@ -24,12 +24,18 @@ class FilmViewModel @Inject constructor(
     private val _filmInfoLiveData = MutableLiveData<FilmInfo>()
     val filmInfoLiveData: LiveData<FilmInfo> get() = _filmInfoLiveData
 
+    private val _trailerLiveData = SingleLiveEvent<String>()
+    fun trailerLiveData(): SingleLiveEvent<String>{
+        return _trailerLiveData
+    }
+
     private val _errorLiveData = SingleLiveEvent<Boolean>()
     fun errorLiveData(): SingleLiveEvent<Boolean>{
         return _errorLiveData
     }
 
     fun searchFilmInfo(id: String) {
+        findFilmTrailer(id)
         viewModelScope.launch {
             val filmsResult = filmsRepository.findFilmInfo(id)
             if (filmsResult.isSuccess) {
@@ -64,6 +70,22 @@ class FilmViewModel @Inject constructor(
                     profileRepository.deleteFilmFromSaved(filmInfoLiveData.value!!.id)
                     getSavedFilms()
                     false
+                }
+            }
+        }
+    }
+
+    private fun findFilmTrailer(id: String){
+        viewModelScope.launch {
+            val trailerResult = filmsRepository.findFilmTrailer(id)
+            println("0000000000000000")
+            println(trailerResult.toString())
+
+            if (trailerResult?.isSuccess == true){
+                trailerResult.getOrNull()?.let {
+                    println("0000000000000001111111110")
+                    println(it.toString())
+                    _trailerLiveData.postValue(it)
                 }
             }
         }

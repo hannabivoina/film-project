@@ -6,7 +6,7 @@
     android:id="@+id/filmMotionLay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/fragment_film_scene">
+    app:layoutDescription="@xml/fragment_film_scene2">
 
     <include
         android:id="@+id/mainToolbar"
@@ -17,10 +17,11 @@
     <FrameLayout
         android:id="@+id/filmPosterLay"
         android:layout_width="match_parent"
-        android:layout_height="344dp"
+        android:layout_height="334dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainToolbar">
+        app:layout_constraintTop_toBottomOf="@id/mainToolbar"
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/filmPoster"
@@ -35,18 +36,26 @@
 
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/filmTrailerLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainToolbar" />
+
     <TextView
         android:id="@+id/filmType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="210dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainToolbar"/>
+        app:layout_constraintTop_toBottomOf="@+id/mainToolbar" />
 
     <TextView
         android:id="@+id/filmTitle"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -54,24 +63,12 @@
         android:textColor="@color/white"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/filmButtonFavorite"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filmType"
         tools:text="Inception" />
 
-    <ImageButton
-        android:id="@+id/filmButtonFavorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/transparent"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filmType"
-        tools:ignore="SpeakableTextPresentCheck" />
 
     <LinearLayout
         android:id="@+id/filmOtherInfoLay"
@@ -148,11 +145,45 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
-        android:maxLines="2"
+        android:maxLines="1"
         android:textSize="16dp"
         app:layout_constraintStart_toEndOf="@id/filmGenres"
         app:layout_constraintTop_toBottomOf="@id/filmOtherInfoLay"
         tools:text="Comedy" />
+
+    <LinearLayout
+        android:id="@+id/trailerLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filmGenresList">
+
+        <Button
+            android:id="@+id/trailerButton"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:backgroundTint="@color/white"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Play Trailer" />
+
+        <ImageButton
+            android:id="@+id/filmButtonFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:minWidth="48dp"
+            android:minHeight="48dp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/filmPlot"
@@ -165,7 +196,7 @@
         android:maxLines="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/filmGenresList"
+        app:layout_constraintTop_toBottomOf="@id/trailerLay"
         tools:text="Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscious during the dream state, when the mind is at its most vulnerable..." />
 
     <TextView

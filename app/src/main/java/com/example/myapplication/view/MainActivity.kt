@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 const val KEY_ARGS_FILM_CONST = "KEY_ARGS_FILM"
 const val KEY_ARGS_ACTOR_CONST = "KEY_ARGS_ACTOR"
 const val KEY_ARGS_SEARCH_CONST = "KEY_ARGS_SEARCH"
+const val KEY_ARGS_TRAILER_CONST = "KEY_ARGS_TRAILER"
 const val KEY_ARGS_COLLECTION_CONST = "KEY_ARGS_COLLECTION"
 
 @AndroidEntryPoint
@@ -153,8 +154,17 @@ class MainActivity : AppCompatActivity(), AppContract {
             .commit()
     }
 
-    override fun toFilmTrailerFragment() {
-        TODO("Not yet implemented")
+    override fun toFilmTrailerFragment(url: String) {
+        val fragment = TrailerViewFragment()
+        val bundle = Bundle()
+        bundle.putString(KEY_ARGS_TRAILER_CONST, url)
+        fragment.arguments = bundle
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.filmTrailerLay, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun isNetworkAvailable(context: Context): Boolean {
@@ -182,5 +192,15 @@ class MainActivity : AppCompatActivity(), AppContract {
             null,
             FragmentManager.POP_BACK_STACK_INCLUSIVE
         )
+    }
+
+    override fun closeTrailerFragment() {
+        val fragment = supportFragmentManager.findFragmentByTag(TrailerViewFragment().tag)
+        if (fragment != null) {
+            supportFragmentManager
+                .beginTransaction()
+                .remove(fragment)
+                .commit()
+        }
     }
 }

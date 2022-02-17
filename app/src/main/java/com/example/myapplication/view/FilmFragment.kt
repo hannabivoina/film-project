@@ -75,8 +75,7 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
                 }
 
                 binding.filmPlot.setOnClickListener {
-                    binding.filmMotionLay.setTransition(R.id.start, R.id.end)
-                    binding.filmMotionLay.transitionToEnd()
+
                 }
 
                 binding.mainToolbar.toolbarMenuLay.setOnMenuItemClickListener {
@@ -84,6 +83,20 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
                         R.id.app_menu_sign_out -> contract()?.signOut()
                     }
                     true
+                }
+
+                viewModel.trailerLiveData().observe(viewLifecycleOwner){
+                    val url = it
+                    binding.trailerButton.setOnClickListener {
+                        binding.filmMotionLay.setTransition(R.id.start, R.id.end)
+                        binding.filmMotionLay.transitionToEnd()
+                        contract()?.toFilmTrailerFragment(url)
+                        binding.trailerButton.isClickable = false
+                    }
+                }
+
+                binding.filmPlot.setOnClickListener {
+                    binding.filmPlot.maxLines = 40
                 }
             }
         } else {
@@ -100,12 +113,14 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
 
     private fun bind(film: FilmInfo) {
         binding.apply {
+
             binding.mainToolbar.toolbarMainTitle.text = film.title
             filmTitle.text = film.title
             filmGenresList.text = film.genres
             filmPlot.text = film.plot
             filmActorsRecycler.adapter = StarsAdapter(film.actorList, object : StarsFilmsInterface {
                 override fun toStarFilms(id: String) {
+                    contract()?.closeTrailerFragment()
                     contract()?.toActorFilms(id)
                 }
             })
@@ -119,6 +134,7 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
 
             filmSimilarMoviesRecycler.adapter = FilmStandardAdapter(object : FilmInterface {
                 override fun goToFilm(id: String) {
+                    contract()?.closeTrailerFragment()
                     contract()?.toFilmInformation(id)
                 }
             }, film.similars)

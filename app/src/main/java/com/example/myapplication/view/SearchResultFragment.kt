@@ -38,6 +38,8 @@ class SearchResultFragment : Fragment() {
 
         if (contract()?.isNetworkAvailable(requireContext()) == true){
 
+            binding.mainToolbar.toolbarMainTitle.text = resources.getString(R.string.search)
+
             binding.mainToolbar.toolbarMenuLay.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.app_menu_sign_out -> contract()?.signOut()

@@ -18,8 +18,8 @@ import retrofit2.http.Path
 
 private const val KEY_CONST = "KEY_CONST"
 private const val QUERY_CONST = "query"
-//private const val API_KEY_IMDB = "k_g6p8l8m7"
-private const val API_KEY_IMDB = "k_cf30v1j7"
+private const val API_KEY_IMDB = "k_g6p8l8m7"
+//private const val API_KEY_IMDB = "k_cf30v1j7"
 //private const val API_KEY_IMDB = "k_iiogeu1r"
 
 interface IMDBApi {

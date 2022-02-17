@@ -4,25 +4,21 @@
     android:layout_height="202dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black"
-    android:id="@+id/videoTrailerLay">
+    android:id="@+id/trailerLay">
 
-    <com.google.android.exoplayer2.ui.PlayerView
-        android:id="@+id/videoTrailerView"
+    <com.google.android.exoplayer2.ui.StyledPlayerView
+        android:id="@+id/trailerPlayerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        app:shutter_background_color="@color/black"
+        android:layout_height="202dp"
+        app:show_buffering="when_playing"
+        app:show_shuffle_button="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:controller_layout_id="@layout/trailer_controller"/>
-
-    <ProgressBar
-        android:id="@+id/trailerProgressBar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:played_color="@color/holo_red"
+        app:unplayed_color="@color/dark_red"
+        app:buffered_color="@color/dark_red"
+        app:scrubber_color="@color/holo_red"
+        app:use_controller="true"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
